@@ -12,14 +12,14 @@ const { generateInterviewQuestions, generateConceptExplanation } = require("./co
 const app = express();
 
 // Middleware to handle CORS
-app.use(
-  cors({
-    origin: "*", 
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    
-  })
-);
+const cors = require('cors');
+
+app.use(cors({
+  origin: ["*", "https://interview-prep-mmsp.vercel.app"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
+
 
 connectDB()
 
