@@ -12,14 +12,36 @@ const { generateInterviewQuestions, generateConceptExplanation } = require("./co
 const app = express();
 
 // Middleware to handle CORS
+// app.use(
+//   cors({
+//     origin: "*", 
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+    
+//   })
+// );
+const allowedOrigins = [
+  'http://localhost:5173', // local dev
+  'https://interview-prep-mmsp.vercel.app', // deployed frontend
+];
+
 app.use(
   cors({
-    origin: "*", 
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    
   })
 );
+
+// Preflight requests support
+app.options('*', cors());
+
 
 connectDB()
 
