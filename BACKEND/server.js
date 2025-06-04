@@ -14,7 +14,7 @@ const app = express();
 // Middleware to handle CORS
 app.use(
   cors({
-    origin: ["*", "https://interview-prep-njtd.vercel.app/"],
+    origin: "*", 
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     
